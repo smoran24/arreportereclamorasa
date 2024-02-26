@@ -1,0 +1,183 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:t="sap.ui.table"
+	controllerName="AR_REPORTE_RECLAMO_RASA.AR_REPORTE_RECLAMO_RASA.controller.App" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+						<Panel>
+							<HBox>
+								<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="22%" justifyContent="Start" visible="true" displayInline="false"
+									id="dealer1">
+									<items>
+										<Text text="Dealer" width="100%" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+										<ComboBox xmlns="sap.m" id="dealer" placeholder="Solicitante" width="100%" items="{path: 'cliente>/'}" loadItems="ConsultaOdata3"
+											change="Destinatario">
+											<items>
+												<core:Item xmlns:core="sap.ui.core" key="{cliente>SOLICITANTE}" text="{cliente>NOMBRE_SOLICITANTE}"/>
+											</items>
+										</ComboBox>
+									</items>
+								</VBox>
+								<HBox width="3%" id="espacio1"/>
+								<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="22%" justifyContent="Start" visible="true" displayInline="false">
+									<items>
+										<Text text="Nro Reclamo " width="100%" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+										<Input width="100%" placeholder="" id="Nreclamo"/>
+									</items>
+								</VBox>
+								<HBox width="3%"/>
+								<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="22%" justifyContent="Start" visible="true" displayInline="false">
+									<items>
+										<Text text="Factura SAP" width="100%" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+										<Input width="100%" placeholder="" id="Factura"/>
+									</items>
+								</VBox>
+								<HBox width="3%"/>
+								<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="22%" justifyContent="Start" visible="true" displayInline="false">
+									<items>
+										<Text text="Entrega" width="100%" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+										<Input width="100%" placeholder="" id="Entrega"/>
+									</items>
+								</VBox>
+								<HBox width="3%"/>
+							</HBox>
+							<VBox height="20px"/>
+							<HBox>
+								<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="30%" justifyContent="Start" visible="true" displayInline="false">
+									<items>
+										<Text text="Fecha Creación" width="100%" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+										<DateRangeSelection id="FechaCreacion"/>
+									</items>
+								</VBox>
+								<HBox width="3%"/>
+								<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="30%" justifyContent="Start" visible="true" displayInline="false">
+									<items>
+										<Text text="Estado" width="100%" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+										<ComboBox xmlns="sap.m" id="cmbEstados" placeholder="Estados" width="100%" items="{path: 'estado>/'}" loadItems="ConsultaOdata3"
+											change="Destinatario">
+											<items>
+												<core:Item xmlns:core="sap.ui.core" key="{estado>ID_EDO}" text="{estado>DESCRIPCION}"/>
+											</items>
+										</ComboBox>
+									</items>
+								</VBox>
+								<HBox width="3%"/>
+								<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="30%" justifyContent="Center" visible="true" displayInline="false">
+									<items>
+										<Text text=" " width="100%" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										<Button text="Buscar" press="Consulta">
+											<!--ariaDescribedBy="defaultButtonDescription genericButtonDescription" -->
+											<layoutData>
+												<FlexItemData growFactor="1"/>
+											</layoutData>
+										</Button>
+									</items>
+								</VBox>
+							</HBox>
+							<content/>
+						</Panel>
+						<Panel>
+							<Table noDataText="Sin datos" items="{ path : 'Reclamos>/'}" id="tMaestra">
+								<headerToolbar>
+									<OverflowToolbar>
+										<ObjectIdentifier id="resumenTabla" title="Reclamos"/>
+										<ToolbarSpacer/>
+										<Button type="Transparent" text=" Enviar" icon="sap-icon://email" press="EnvioCorreo"/>
+										<Button type="Transparent" text=" Descargar" icon="sap-icon://excel-attachment" press="downloadExcel"/>
+								
+									</OverflowToolbar>
+								</headerToolbar>
+								<columns>
+									<Column hAlign="Center" width="auto" id="solicitantecolum">
+										<Text text="Solicitante"/>
+									</Column>
+									<Column hAlign="Center" width="auto">
+										<Text text="Entrega"/>
+									</Column>
+									<Column hAlign="Center" width="auto">
+										<Text text="Remito Legal"/>
+									</Column>
+									<Column hAlign="Center" width="auto">
+										<Text text="Fecha Remito"/>
+									</Column>
+									<Column hAlign="Center" width="auto">
+										<Text text="Pedido Web"/>
+									</Column>
+									<Column hAlign="Center" width="auto">
+										<Text text="Pedido Dealer"/>
+									</Column>
+									<Column hAlign="Center" width="auto">
+										<Text text="Tipo Pedido"/>
+									</Column>
+									<Column hAlign="Left" width="auto">
+										<Text text="Nro Pieza"/>
+									</Column>
+									<Column hAlign="Left" width="auto">
+										<Text text="Descripción"/>
+									</Column>
+									<Column hAlign="Center" width="6%">
+										<Text text="Cant Facturada"/>
+									</Column>
+									<Column hAlign="Center" width="auto">
+										<Text text="Cant Reclamada"/>
+									</Column>
+									<Column hAlign="Center" width="auto">
+										<Text text="Factura SAP"/>
+									</Column>
+									<Column hAlign="Center" width="auto">
+										<Text text="Estado Reclamo"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem type="Active">
+										<cells>
+											<Text text="{Reclamos>NOMBRE_DEALER}"/>
+											<Link text="{Reclamos>ENTREGA}" press="InfoDetalle"/>
+											<Text text="{Reclamos>REMITOLEGAL}"/>
+											<Text text="{Reclamos>FECHAREMITO}"/>
+											<Text text="{Reclamos>PEDIDOWEB}"/>
+											<Text text="{Reclamos>PEDIDODEALER}"/>
+											<Text text="{Reclamos>TIPOPEDIDO}"/>
+											<Text text="{Reclamos>NROPIEZA}"/>
+											<Text text="{Reclamos>DESCRIPCION}"/>
+											<Text text="{Reclamos>CANTFACTURADA}"/>
+											<Text text="{Reclamos>CANTRECLAMADA}"/>
+											<Text text="{Reclamos>FACTURASAP}"/>
+											<core:Icon src="{Reclamos>color}" height="20px" width="25px" class="size2" color="{Reclamos>ncolor}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</Panel>
+					</content>
+					<footer>
+						<Bar class="sapContrast sapContrastPlus">
+							<contentLeft>
+								<Label id="totalOp"/>
+							</contentLeft>
+							<contentRight>
+								<Button text="Salir" type="Reject" icon="sap-icon://log" press="onSalir"/>
+							</contentRight>
+						</Bar>
+					</footer>
+					<customHeader>
+						<Bar class="sapContrastPlus" design="Header" visible="false">
+							<contentLeft>
+								<VBox width="15px"/>
+								<Text text="Consulta Operaciones de Crédito" class="tituloHead"/>
+								<!--Image height="28px" id="lNissan"/-->
+							</contentLeft>
+							<!--contentMiddle>
+							<Label text="Consulta Operaciones de Crédito" class="tituloHead"/>
+						</contentMiddle-->
+							<contentRight>
+								<Image height="20px" id="lCrediNissan"/>
+							</contentRight>
+						</Bar>
+					</customHeader>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

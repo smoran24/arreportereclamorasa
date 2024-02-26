@@ -1,0 +1,1 @@
+sap.ui.define(["sap/ui/test/Opa5","./arrangements/Startup","./NavigationJourney"],function(e,a){"use strict";e.extendConfig({arrangements:new a,viewNamespace:"AR_REPORTE_RECLAMO_RASA.AR_REPORTE_RECLAMO_RASA.view.",autoWait:true})});
